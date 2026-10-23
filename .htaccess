@@ -1,0 +1,15 @@
+# Priečinky s kódom a SQL nie sú stránky.
+RedirectMatch 404 /(src|vendor|sql|\.git)(/|$)
+
+# Súbor s heslom k databáze sa cez web nedá otvoriť.
+<Files "config.php">
+    Require all denied
+</Files>
+
+# Priečinok bez index.php nevypíše svoj obsah.
+IndexIgnore *
+
+# Prepisovanie ciest: každá cesta, ktorá nie je existujúci súbor, ide do index.php.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
